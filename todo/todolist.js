@@ -4,68 +4,70 @@
         this.done = Boolean(completed);
     };
 
-    var TodoController = function ($scope) {
-        $scope.routes = {
+    var TodoController = function () {
+        var todoList = this;
+
+        this.routes = {
             ALL_TODOS: 1,
             ARCHIVED_TODOS: 2
         };
-        $scope.newTodoTitle = "";
-        $scope.displayTodos = [];
+        this.newTodoTitle = "";
+        this.displayTodos = [];
 
-        $scope.todos = [
+        this.todos = [
             new TodoItem("task 1"),
             new TodoItem("task 2")
         ];
 
-        $scope.archivedTodos = [
+        this.archivedTodos = [
             new TodoItem("Archived task 1", true)
         ];
 
-        $scope.displayTodos = $scope.todos;
-        $scope.currentRoute = $scope.routes.ALL_TODOS;
+        this.displayTodos = this.todos;
+        this.currentRoute = this.routes.ALL_TODOS;
 
-        $scope.addTodo = function () {
-            var newTitle = $scope.newTodoTitle.trim();
+        this.addTodo = function () {
+            var newTitle = this.newTodoTitle.trim();
             if (newTitle) {
-                $scope.todos.push(new TodoItem(newTitle));
-                $scope.newTodoTitle = "";
+                this.todos.push(new TodoItem(newTitle));
+                this.newTodoTitle = "";
             }
         };
 
-        $scope.remainingCount = function () {
-           return $scope.todos.reduce(function(acc, item) {
+        this.remainingCount = function () {
+           return this.todos.reduce(function(acc, item) {
                if (item.done) acc++;
                return acc;
            }, 0);
         };
 
-        $scope.showArchived = function () {
-            $scope.displayTodos = $scope.archivedTodos;
-            $scope.currentRoute = $scope.routes.ARCHIVED_TODOS;
+        this.showArchived = function () {
+            this.displayTodos = this.archivedTodos;
+            this.currentRoute = this.routes.ARCHIVED_TODOS;
         };
 
-        $scope.showCurrent = function () {
-            $scope.displayTodos = $scope.todos;
-            $scope.currentRoute = $scope.routes.ALL_TODOS;
+        this.showCurrent = function () {
+            this.displayTodos = this.todos;
+            this.currentRoute = this.routes.ALL_TODOS;
         };
 
-        $scope.moveToArchive = function () {
+        this.moveToArchive = function () {
             var newTodos = [];
 
-            $scope.todos.forEach(function(todo) {
+            this.todos.forEach(function(todo) {
                 if (todo.done) {
-                    $scope.archivedTodos.push(todo);
+                    todoList.archivedTodos.push(todo);
                 } else {
                     newTodos.push(todo);
                 }
             });
 
-            $scope.todos = newTodos;
-            $scope.showCurrent();
+            this.todos = newTodos;
+            this.showCurrent();
         };
     };
 
-    angular.module('todolist', [])
-        .controller('TodoController', ['$scope', TodoController]);
+    angular.module('todoApp', [])
+        .controller('TodoController', TodoController);
 
 })(angular);
