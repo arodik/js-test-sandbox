@@ -32,7 +32,7 @@ export default function () {
 
     this.remainingCount = function () {
         return this.todos.reduce(function(acc, item) {
-            if (item.done) acc++;
+            if (!item.done) acc++;
             return acc;
         }, 0);
     };
