@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todolist">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular simple todo list</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="todolist.js"></script>
+    <link rel="stylesheet" href="todolist.css">
+</head>
+<body>
+    <h1>Angular todo list</h1>
+    <div ng-controller="TodoController">
+        <h3>{{remainingCount()}} of {{todos.length}} remaining</h3>
+        <p>
+            <span ng-click="showCurrent()"
+                  ng-class="{'link--disabled': currentRoute == routes.ALL_TODOS}"
+                  class="link">[show current]</span>
+
+            <span ng-click="showArchived()"
+                  ng-class="{'link--disabled': currentRoute == routes.ARCHIVED_TODOS}"
+                  class="link">[show archived]</span>
+        </p>
+        <div>Enter the task title</div>
+        <form ng-submit="addTodo()">
+            <input type="text" ng-model="newTodoTitle">
+            <br>
+            <button type="submit">Add</button>
+            <button ng-click="moveToArchive()">Move completed to archive</button>
+        </form>
+        <ul>
+            <li ng-repeat="todo in displayTodos">
+                <input type="checkbox"
+                       ng-model="todo.done"
+                       ng-if="currentRoute == routes.ALL_TODOS"
+                />
+                <span
+                    ng-class="{'todo-done': todo.done == true && currentRoute == routes.ALL_TODOS}"
+                >{{todo.title}}</span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

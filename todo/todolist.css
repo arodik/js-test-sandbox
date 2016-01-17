@@ -1,0 +1,15 @@
+.todo-done {
+    text-decoration: line-through;
+    color: grey;
+}
+
+.link {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.link--disabled {
+    color: grey;
+    cursor: default;
+}
