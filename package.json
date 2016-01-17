@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "todo-dev": "gulp todo-dev",
+    "todo-build": "gulp todo-build"
+  },
+  "dependencies": {
+    "angular": "^1.4.8",
+    "gulp": "^3.9.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rollup": "^1.7.0",
+    "gulp-watch": "^4.3.5",
+    "rollup": "^0.24.1",
+    "rollup-plugin-string": "^1.0.1"
+  }
+}
